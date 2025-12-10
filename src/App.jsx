@@ -1,5 +1,12 @@
 // src/App.jsx
 import { kuberBali } from "./brochureData";
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  WA_TEXT_HERO,
+  WA_TEXT_STICKY,
+  WA_TEXT_FORM,
+} from "./contactConfig";
 
 function SectionTitle({ eyebrow, children }) {
   return (
@@ -16,13 +23,13 @@ function App() {
       {/* Top nav */}
       <header className="top-nav">
         <div className="top-nav-inner">
-       <div className="brand">
-              <span className="brand-logo">🚵</span>
-              <span className="brand-text">
-                <strong>Kuber ATV Ride</strong>
-                <span>Adventure • Ubud • Bali</span>
-              </span>
-            </div>
+          <div className="brand">
+            <span className="brand-logo">🚵</span>
+            <span className="brand-text">
+              <strong>Kuber ATV Ride</strong>
+              <span>Adventure • Ubud • Bali</span>
+            </span>
+          </div>
           <a href="#book" className="nav-cta">
             Book now
           </a>
@@ -61,9 +68,11 @@ function App() {
                 Check slots
               </a>
 
-              {/* WhatsApp quick chat */}
-                 <a
-                href="https://wa.me/917013484408?text=Hi%20I%20want%20to%20book%20the%20Kuber%20Bali%20ATV%20Adventure"
+              {/* WhatsApp quick chat (uses centralized config) */}
+              <a
+                href={`https://wa.me/${CONTACT_PHONE}?text=${encodeURIComponent(
+                  WA_TEXT_HERO
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="wa-icon-only"
@@ -244,7 +253,10 @@ function App() {
               const body = encodeURIComponent(
                 `Name: ${name}\nEmail: ${email}\nPhone/WhatsApp: ${phone}\nDate: ${date}\nPreferred trip: ${trip}\n\nMessage:\n${message}`
               );
-              window.location.href = `mailto:satishvasu7518@gmail.com?subject=Kuber Bali ATV Enquiry&body=${body}`;
+
+              window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+                "Kuber Bali ATV Enquiry"
+              )}&body=${body}`;
             }}
           >
             <div className="form-grid">
@@ -291,20 +303,22 @@ function App() {
             <p className="text tiny">
               This will open your email app with all details filled in.
             </p>
-              {/* WhatsApp icon only */}
-              <a
-                href="https://wa.me/917013484408?text=Hi%20I%20want%20to%20book%20the%20Kuber%20Bali%20ATV%20Adventure"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="wa-icon-only"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-                  alt="WhatsApp"
-                  style={{ width: "36px", height: "36px" }}
-                />
-              </a>
 
+            {/* WhatsApp icon only (centralized config) */}
+            <a
+              href={`https://wa.me/${CONTACT_PHONE}?text=${encodeURIComponent(
+                WA_TEXT_FORM
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="wa-icon-only"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                alt="WhatsApp"
+                style={{ width: "36px", height: "36px" }}
+              />
+            </a>
           </form>
         </section>
       </main>
@@ -316,7 +330,9 @@ function App() {
           <strong>Rp. 1.200.000</strong>
         </div>
         <a
-          href="https://wa.me/917013484408?text=Hi%20I%20am%20looking%20for%20Kuber%20Bali%20ATV%20Adventure%20details."
+          href={`https://wa.me/${CONTACT_PHONE}?text=${encodeURIComponent(
+            WA_TEXT_STICKY
+          )}`}
           target="_blank"
           rel="noopener noreferrer"
           className="sticky-button"
@@ -328,9 +344,9 @@ function App() {
       <footer className="footer">
         © {new Date().getFullYear()} Kuber Bali Adventure • Demo website
       </footer>
-
     </div>
   );
 }
 
 export default App;
+
